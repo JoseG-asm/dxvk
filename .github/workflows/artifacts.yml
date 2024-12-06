@@ -27,7 +27,7 @@ jobs:
           echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_ENV
 
     - name: "Create Release"
-      uses: softprops/action-gh-release@v2
+      uses: actions/checkout@v4
       with:
         name: "DXVK 1.10-${{ env.VERSION_NAME }} (Stripped Down Requirements)"
         tag_name: ${{ env.VERSION_NAME }}
