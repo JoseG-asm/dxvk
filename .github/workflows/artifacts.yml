@@ -26,10 +26,29 @@ jobs:
           ./package-release.sh ${VERSION_NAME} build --no-package
           echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_ENV
 
-    - name: "Create Release"
+    - name: Checkout Repository
       uses: actions/checkout@v4
       with:
-        name: "DXVK 1.10-${{ env.VERSION_NAME }} (Stripped Down Requirements)"
+        repository: JoseG-asm/dxvk
+        ref: ${{ env.VERSION_NAME }}
+        fetch-depth: 1
+
+    - name: Create GitHub Release
+      id: create-release
+      uses: actions/create-release@v1
+      with:
         tag_name: ${{ env.VERSION_NAME }}
-        files: build/dxvk-${{ env.VERSION_NAME }}
-    
+        release_name: "DXVK 1.10-${{ env.VERSION_NAME }} (Stripped Down Requirements)"
+        body: "Release description or changelog here."
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload Release Assets
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create-release.outputs.upload_url }}
+        asset_path: build/dxvk-${{ env.VERSION_NAME }}
+        asset_name: dxvk-${{ env.VERSION_NAME }}.zip
+        asset_content_type: application/zip
