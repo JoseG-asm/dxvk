@@ -36,7 +36,7 @@ jobs:
         draft: false
         prerelease: false
       env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Compress
       run: 
@@ -49,3 +49,6 @@ jobs:
         asset_path: build/dxvk-${{ env.VERSION_NAME }}.zip
         asset_name: dxvk-${{ env.VERSION_NAME }}.zip
         asset_content_type: application/zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
