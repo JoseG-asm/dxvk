@@ -26,13 +26,6 @@ jobs:
           ./package-release.sh ${VERSION_NAME} build --no-package
           echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_ENV
 
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-      with:
-        repository: JoseG-asm/dxvk
-        ref: ${{ env.VERSION_NAME }}
-        fetch-depth: 1
-
     - name: Create GitHub Release
       id: create-release
       uses: actions/create-release@v1
