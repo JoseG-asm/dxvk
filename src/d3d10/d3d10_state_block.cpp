@@ -53,8 +53,7 @@ namespace dxvk {
     
     *ppvObject = nullptr;
 
-    if (riid == __uuidof(IUnknown)
-     || riid == __uuidof(ID3D10StateBlock)) {
+    if (riid == __uuidof(IUnknown) {
       *ppvObject = ref(this);
       return S_OK;
     }
